@@ -3,6 +3,7 @@ package com.tokentrackr.user_service.model;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,6 +14,8 @@ public class User {
     private String username;
     private boolean enabled = true;
     private String keycloakId;
+    private BigDecimal balance;
+    private BigDecimal reservedBalance;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

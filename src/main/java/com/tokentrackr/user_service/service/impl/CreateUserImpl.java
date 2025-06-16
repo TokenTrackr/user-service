@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
 
+import java.math.BigDecimal;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -41,6 +43,7 @@ public class CreateUserImpl implements CreateUserService {
         UserEntity userEntity = UserEntity.builder()
                 .keycloakId(keycloakId)
                 .username(request.getUsername())
+                .balance(new BigDecimal("10000.00")) // Default balance
                 .enabled(true)
                 .build();
         UserEntity savedUser = userRepository.save(userEntity);

@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -33,6 +34,14 @@ public class UserEntity {
 
     @Column(name = "keycloak_id")
     private String keycloakId;
+
+    /** What the user can spend right now **/
+    @Column(nullable = false)
+    private BigDecimal balance = BigDecimal.ZERO;
+
+    /** Funds reserved for in‑flight transactions **/
+    @Column(name = "reserved_balance", nullable = false)
+    private BigDecimal reservedBalance = BigDecimal.ZERO;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
