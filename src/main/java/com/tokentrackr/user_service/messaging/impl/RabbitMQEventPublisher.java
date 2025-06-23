@@ -1,6 +1,5 @@
 package com.tokentrackr.user_service.messaging.impl;
 
-import com.tokentrackr.user_service.dto.events.BalanceUpdateEvent;
 import com.tokentrackr.user_service.dto.events.BalanceUpdateFailedEvent;
 import com.tokentrackr.user_service.dto.events.BalanceUpdatedEvent;
 import com.tokentrackr.user_service.messaging.EventPublisher;
@@ -13,13 +12,15 @@ import org.springframework.stereotype.Component;
 public class RabbitMQEventPublisher implements EventPublisher {
     private final RabbitTemplate rabbitTemplate;
 
+    private static final String EXCHANGE = "saga.direct.exchange";
+
     @Override
     public void publishBalanceUpdated(BalanceUpdatedEvent event) {
-        rabbitTemplate.convertAndSend("balance.updated.queue", event);
+        rabbitTemplate.convertAndSend(EXCHANGE, "balance.updated", event);
     }
 
     @Override
     public void publishBalanceUpdateFailed(BalanceUpdateFailedEvent event) {
-        rabbitTemplate.convertAndSend("balance.update.failed.queue", event);
+        rabbitTemplate.convertAndSend(EXCHANGE, "balance.update.failed", event);
     }
 }

@@ -44,6 +44,7 @@ public class CreateUserImpl implements CreateUserService {
                 .keycloakId(keycloakId)
                 .username(request.getUsername())
                 .balance(new BigDecimal("10000.00")) // Default balance
+                .reservedBalance(new BigDecimal("0.00"))
                 .enabled(true)
                 .build();
         UserEntity savedUser = userRepository.save(userEntity);
